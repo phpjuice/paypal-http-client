@@ -1,7 +1,6 @@
 # PayPal HTTP Client
 
 ![Tests](https://github.com/phpjuice/paypal-http-client/workflows/Tests/badge.svg?branch=main)
-[![Build Status](https://travis-ci.com/phpjuice/paypal-http-client.svg?branch=main)](https://travis-ci.com/phpjuice/paypal-http-client)
 [![Latest Stable Version](http://poser.pugx.org/phpjuice/paypal-http-client/v)](https://packagist.org/packages/phpjuice/paypal-http-client)
 [![Total Downloads](http://poser.pugx.org/phpjuice/paypal-http-client/downloads)](https://packagist.org/packages/phpjuice/paypal-http-client)
 [![License](http://poser.pugx.org/phpjuice/paypal-http-client/license)](https://packagist.org/packages/phpjuice/paypal-http-client)
@@ -96,7 +95,6 @@ license. Please see the [Licence](https://github.com/phpjuice/paypal-http-client
 information.
 
 ![Tests](https://github.com/phpjuice/paypal-http-client/workflows/Tests/badge.svg?branch=main)
-[![Build Status](https://travis-ci.com/phpjuice/paypal-http-client.svg?branch=main)](https://travis-ci.com/phpjuice/paypal-http-client)
 [![Latest Stable Version](http://poser.pugx.org/phpjuice/paypal-http-client/v)](https://packagist.org/packages/phpjuice/paypal-http-client)
 [![Total Downloads](http://poser.pugx.org/phpjuice/paypal-http-client/downloads)](https://packagist.org/packages/phpjuice/paypal-http-client)
 [![License](http://poser.pugx.org/phpjuice/paypal-http-client/license)](https://packagist.org/packages/phpjuice/paypal-http-client)
