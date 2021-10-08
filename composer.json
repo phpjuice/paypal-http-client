@@ -1,0 +1,54 @@
+{
+    "name": "phpjuice/paypal-http-client",
+    "description": "PHP Http Client for PayPal's REST API",
+    "keywords": [
+        "phpjuice",
+        "paypal",
+        "http",
+        "client"
+    ],
+    "homepage": "https://github.com/phpjuice/paypal-http-client",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "PHPJuice",
+            "email": "phpjuice@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "ext-json": "*",
+        "guzzlehttp/psr7": "^1.6|^2.0",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.4",
+        "phpstan/phpstan": "^0.12",
+        "pestphp/pest": "^1.18"
+    },
+    "autoload": {
+        "psr-4": {
+            "PayPal\\Http\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "analyse": "phpstan analyse src tests",
+        "php-cs-fixer": [
+            "php-cs-fixer fix src --rules=@PSR2",
+            "php-cs-fixer fix tests --rules=@PSR2"
+        ]
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
