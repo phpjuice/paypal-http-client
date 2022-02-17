@@ -4,11 +4,6 @@ namespace PayPal\Http\Environment;
 
 class SandboxEnvironment extends PayPalEnvironment
 {
-    public function __construct($clientId, $clientSecret)
-    {
-        parent::__construct($clientId, $clientSecret);
-    }
-
     /**
      * @return string
      */

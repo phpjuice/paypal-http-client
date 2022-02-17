@@ -6,7 +6,7 @@ use PayPal\Http\Environment\Environment;
 
 class AccessTokenRequest extends PaypalRequest
 {
-    public function __construct(Environment $environment, $refresh_token = null)
+    public function __construct(Environment $environment, ?string $refresh_token = null)
     {
         $headers = [
             'Authorization' => 'Basic '.$environment->basicAuthorizationString(),

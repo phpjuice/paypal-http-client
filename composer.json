@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^7.4|^8.0|^8.1",
         "ext-json": "*",
         "guzzlehttp/psr7": "^1.6|^2.0",
         "guzzlehttp/guzzle": "^7.0"
@@ -41,8 +41,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "test": "vendor/bin/pest",
-        "analyse": "phpstan analyse src tests",
+        "test": "vendor/bin/pest --colors=always",
+        "analyse": "phpstan analyse --ansi --debug",
         "php-cs-fixer": [
             "php-cs-fixer fix src --rules=@PSR2",
             "php-cs-fixer fix tests --rules=@PSR2"

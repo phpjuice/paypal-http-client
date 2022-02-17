@@ -59,7 +59,7 @@ class AccessToken
     /**
      * returns authorization string.
      */
-    public function authorizationString(): ?string
+    public function authorizationString(): string
     {
         return $this->token_type.' '.$this->token;
     }
