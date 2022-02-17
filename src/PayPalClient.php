@@ -5,10 +5,11 @@ namespace PayPal\Http;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Utils;
 use PayPal\Http\Environment\Environment;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use stdClass;
 
 class PayPalClient implements HttpClient
 {
@@ -48,12 +49,12 @@ class PayPalClient implements HttpClient
     /**
      * Send http request.
      *
-     * @param  Request  $request
-     * @return Response
+     * @param  RequestInterface  $request
+     * @return ResponseInterface
      * @throws GuzzleException
      * @throws RequestException
      */
-    public function send(Request $request): Response
+    public function send(RequestInterface $request): ResponseInterface
     {
         // if request doesn't have an authorization header
         if (!$this->hasAuthHeader($request)) {
@@ -61,8 +62,11 @@ class PayPalClient implements HttpClient
             if ($this->hasInvalidToken()) {
                 $this->fetchAccessToken();
             }
+
             // add Authorization header to request
-            $request = $request->withHeader('Authorization', $this->access_token->authorizationString());
+            if ($this->access_token) {
+                $request = $request->withHeader('Authorization', $this->access_token->authorizationString() ?? '');
+            }
         }
 
         // add user agent header to request
@@ -81,10 +85,10 @@ class PayPalClient implements HttpClient
     /**
      * Check if headers contain an auth header.
      *
-     * @param  Request  $request
+     * @param  RequestInterface  $request
      * @return bool
      */
-    public function hasAuthHeader(Request $request): bool
+    public function hasAuthHeader(RequestInterface $request): bool
     {
         return array_key_exists('Authorization', $request->getHeaders());
     }
@@ -108,7 +112,8 @@ class PayPalClient implements HttpClient
     public function fetchAccessToken(): AccessToken
     {
         $response = $this->client->send(new AccessTokenRequest($this->environment));
-        $result = Utils::jsonDecode((string) $response->getBody());
+        /** @var stdClass $result */
+        $result = Utils::jsonDecode($response->getBody()->getContents());
         $this->access_token = new AccessToken($result->access_token, $result->token_type, $result->expires_in);
 
         return $this->access_token;
@@ -117,10 +122,10 @@ class PayPalClient implements HttpClient
     /**
      * Injects default user-agent into the request.
      *
-     * @param  Request  $request
-     * @return Request
+     * @param  RequestInterface  $request
+     * @return RequestInterface
      */
-    public function injectUserAgentHeaders(Request $request): Request
+    public function injectUserAgentHeaders(RequestInterface $request): RequestInterface
     {
         return $request->withHeader('User-Agent', 'PayPalHttp-PHP HTTP/1.1');
     }
@@ -128,10 +133,10 @@ class PayPalClient implements HttpClient
     /**
      * Inject PayPal sdk headers into request.
      *
-     * @param  Request  $request
-     * @return Request
+     * @param  RequestInterface  $request
+     * @return RequestInterface
      */
-    public function injectSdkHeaders(Request $request): Request
+    public function injectSdkHeaders(RequestInterface $request): RequestInterface
     {
         $r = $request->withHeader('sdk_name', 'PayPal PHP SDK')
             ->withHeader('sdk_version', '1.0.0');
@@ -151,10 +156,10 @@ class PayPalClient implements HttpClient
     /**
      * Inject gzip headers into the request.
      *
-     * @param  Request  $request
-     * @return Request
+     * @param  RequestInterface  $request
+     * @return RequestInterface
      */
-    public function injectGzipHeaders(Request $request): Request
+    public function injectGzipHeaders(RequestInterface $request): RequestInterface
     {
         return $request->withHeader('Accept-Encoding', 'gzip');
     }

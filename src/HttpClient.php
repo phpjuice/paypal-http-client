@@ -4,17 +4,17 @@ namespace PayPal\Http;
 
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 interface HttpClient
 {
     /**
      * Send the http request.
      *
-     * @param  Request  $request
-     * @return Response
+     * @param  RequestInterface  $request
+     * @return ResponseInterface
      * @throws GuzzleException|RequestException
      */
-    public function send(Request $request): Response;
+    public function send(RequestInterface $request): ResponseInterface;
 }
