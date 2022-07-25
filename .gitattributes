@@ -1,11 +1,10 @@
 /.gitattributes         export-ignore
 /.editorconfig          export-ignore
 /.gitignore             export-ignore
-/.travis.yml            export-ignore
 /composer.lock          export-ignore
-/CODE_OF_CONDUCT.md     export-ignore
-/CONTRIBUTING.md        export-ignore
 /phpunit.xml.dist       export-ignore
+/phpunit.xml            export-ignore
+/phpstan.neon           export-ignore
 /tests                  export-ignore
 /.github                export-ignore
 

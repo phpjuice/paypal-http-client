@@ -18,9 +18,9 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0|^8.1",
+        "php": "^7.4 || ^8.0 || ^8.1",
         "ext-json": "*",
-        "guzzlehttp/psr7": "^1.6|^2.0",
+        "guzzlehttp/psr7": "^1.6 || ^2.0",
         "guzzlehttp/guzzle": "^7.0"
     },
     "require-dev": {
@@ -49,6 +49,9 @@
         ]
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     }
 }
