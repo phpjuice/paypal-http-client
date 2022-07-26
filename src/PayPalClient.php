@@ -27,7 +27,11 @@ class PayPalClient implements HttpClient
     public function __construct(Environment $environment)
     {
         $this->environment = $environment;
-        $this->client = new Client(['base_uri' => $environment->baseUrl()]);
+        $this->client = new Client([
+            'base_uri' => $environment->baseUrl(),
+            'timeout' => 30,
+            'connect_timeout' => 10,
+        ]);
         $this->access_token = null;
     }
 
