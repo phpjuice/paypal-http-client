@@ -6,29 +6,22 @@ class AccessToken
 {
     /**
      * Access token returned by PayPal.
-     *
-     * @var string
      */
     protected string $token;
 
     /**
      * Access token type.
      *
-     * @var string
      */
     protected string $token_type;
 
     /**
-     * time for access token to expires in seconds.
-     *
-     * @var int
+     * Time for access token to expires in seconds.
      */
     protected int $expires_in;
 
     /**
-     * time for creating access token to expires in seconds.
-     *
-     * @var int
+     * Time for creating access token to expires in seconds.
      */
     protected int $created_at;
 
@@ -41,7 +34,7 @@ class AccessToken
     }
 
     /**
-     * gets the token.
+     * Get the token.
      */
     public function getToken(): ?string
     {
@@ -49,7 +42,7 @@ class AccessToken
     }
 
     /**
-     * gets the token.
+     * Get the token type.
      */
     public function getTokenType(): ?string
     {
@@ -57,7 +50,7 @@ class AccessToken
     }
 
     /**
-     * returns authorization string.
+     * Returns authorization string.
      */
     public function authorizationString(): string
     {
@@ -65,10 +58,10 @@ class AccessToken
     }
 
     /**
-     * returns if a token is expired or not.
+     * Determines if the token is expired or not.
      */
     public function isExpired(): bool
     {
-        return time() >= $this->created_at + $this->expires_in;
+        return time() >= ($this->created_at + $this->expires_in);
     }
 }

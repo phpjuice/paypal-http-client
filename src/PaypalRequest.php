@@ -7,4 +7,5 @@ use Psr\Http\Message\RequestInterface;
 
 abstract class PaypalRequest extends Request implements RequestInterface
 {
+    //
 }

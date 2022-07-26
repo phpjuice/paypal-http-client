@@ -13,25 +13,10 @@ use stdClass;
 
 class PayPalClient implements HttpClient
 {
-    /**
-     * Paypal environment (sandbox|production).
-     *
-     * @var Environment
-     */
     protected Environment $environment;
 
-    /**
-     * Http client.
-     *
-     * @var Client
-     */
     protected Client $client;
 
-    /**
-     * Access Token.
-     *
-     * @var ?AccessToken
-     */
     protected ?AccessToken $access_token;
 
     /**
@@ -69,16 +54,12 @@ class PayPalClient implements HttpClient
             }
         }
 
-        // add user agent header to request
         $request = $this->injectUserAgentHeaders($request);
 
-        // add sdk headers
         $request = $this->injectSdkHeaders($request);
 
-        // add gzip headers
         $request = $this->injectGzipHeaders($request);
 
-        // send request and return response
         return $this->client->send($request);
     }
 
@@ -112,6 +93,7 @@ class PayPalClient implements HttpClient
     public function fetchAccessToken(): AccessToken
     {
         $response = $this->client->send(new AccessTokenRequest($this->environment));
+
         /** @var stdClass $result */
         $result = Utils::jsonDecode($response->getBody()->getContents());
         $this->access_token = new AccessToken($result->access_token, $result->token_type, $result->expires_in);
@@ -165,7 +147,7 @@ class PayPalClient implements HttpClient
     }
 
     /**
-     * Returns default user-agent.
+     * Set custom Guzzle Http client.
      */
     public function setClient(Client $client): self
     {
